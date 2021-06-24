@@ -1,0 +1,25 @@
+{
+    "name": "simoneddy/config",
+    "description": "basic read only config class with file/dir loader and dot notation",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Simon Eddy",
+            "email": "simon@simoneddy.com.au"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+       "bin-dir": "bin"
+    },
+    "autoload": {
+       "psr-4": {
+          "Eddy\\Config\\": "src"
+       }
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.3"
+    }
+}
