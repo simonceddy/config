@@ -1,8 +1,19 @@
 <?php
 namespace Eddy\Config;
 
+use Symfony\Component\Yaml\Yaml;
+
 class ConfigLoader
 {
+    public const UNSUPPORTED_FILETYPE = 'UNSUPPORTED_FILETYPE';
+
+    private bool $yamlSupport = false;
+
+    public function __construct()
+    {
+        !class_exists(Yaml::class) ?: $this->yamlSupport = true;
+    }
+
     public function load(string $path)
     {
         if (!file_exists($path)) {
@@ -29,6 +40,10 @@ class ConfigLoader
     {
         $ext = substr(strrchr($path, "."), 1);
         // dd($ext);
+        if ($ext === 'yml' || $ext === 'yaml' && $this->yamlSupport) {
+            return Yaml::parseFile($path);
+        }
+
         switch ($ext) {
             case 'php':
                 return SafeInclude::file($path);
@@ -38,7 +53,7 @@ class ConfigLoader
             // case 'yml':
             //     return Yaml::parseFile($path);
             default:
-                return null;
+                return static::UNSUPPORTED_FILETYPE;
         }
     }
 
@@ -50,10 +65,13 @@ class ConfigLoader
 
         foreach ($files as $name) {
             if ($name !== '.' && $name !== '..') {
-                $values[$this->pathToKey($name)] = is_dir(
+                $result = is_dir(
                     $full = $path . DIRECTORY_SEPARATOR . $name
                 ) ? $this->loadDir($full) : $this->loadFile($full);
                 // load file
+                if ($result !== static::UNSUPPORTED_FILETYPE) {
+                    $values[$this->pathToKey($name)] = $result;
+                }
             }
         }
 

@@ -19,7 +19,14 @@
           "Eddy\\Config\\": "src"
        }
     },
+    "suggest": {
+        "symfony/yaml": "Required for YAML support"
+    },
     "require-dev": {
-        "symfony/var-dumper": "^5.3"
+        "symfony/var-dumper": "^5.3",
+        "symfony/yaml": "^5.3"
+    },
+    "require": {
+        "php": ">=8.0"
     }
 }
