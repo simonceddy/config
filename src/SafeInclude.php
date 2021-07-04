@@ -5,10 +5,10 @@ final class SafeInclude
 {
     public static function file(string $path)
     {
-        return safeInclude($path);
+        return noScopeSafeInclude($path);
     }
 }
 
-function safeInclude(string $path) {
+function noScopeSafeInclude(string $path) {
     return include $path;
 }
