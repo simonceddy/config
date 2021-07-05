@@ -13,7 +13,7 @@ composer require simoneddy/config
 ## Dependencies
 
 - PHP >=8.0
-- symfony/yaml (optional for yaml support)
+- [symfony/yaml](https://symfony.com/doc/current/components/yaml.html) (optional for yaml support)
 
 ## Usage
 
@@ -44,6 +44,8 @@ $config = \Eddy\Config\Config::fromPath(__DIR__ . '/config');
 // key:
 var_dump($config['test.isTrue']);
 ```
+
+__PLEASE NOTE__ YAML files will be ignored unless the [symfony/yaml](https://symfony.com/doc/current/components/yaml.html) package is also installed.
 
 You can also use the Config class constructor and provide your config values directly as the sole argument:
 
