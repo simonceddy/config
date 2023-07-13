@@ -53,32 +53,32 @@ class Config implements \ArrayAccess, \Serializable, \JsonSerializable
         return $this->resolveFrom($key) !== null;
     }
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return $this->has($offset);
     }
     
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return $this->get($offset);
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         // does nothing
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         // does nothing
     }
 
-    public function serialize()
+    public function serialize(): string
     {
         return serialize($this->values);
     }
 
-    public function unserialize($serialized)
+    public function unserialize($serialized): mixed
     {
         $this->values = unserialize($serialized);
     }
@@ -88,7 +88,7 @@ class Config implements \ArrayAccess, \Serializable, \JsonSerializable
         return $this->values;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return $this->toArray();
     }
