@@ -49,6 +49,8 @@ class ConfigLoader
                 return SafeInclude::file($path);
             case 'json':
                 return json_decode(file_get_contents($path), true);
+            case 'csv':
+                return str_getcsv(file_get_contents($path));
             // case 'yaml':
             // case 'yml':
             //     return Yaml::parseFile($path);
