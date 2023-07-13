@@ -1,7 +1,7 @@
 <?php
 namespace Eddy\Config;
 
-class Config implements \ArrayAccess, \Serializable, \JsonSerializable
+class Config implements \ArrayAccess, \JsonSerializable
 {
     public function __construct(private ? array $values = [])
     {}
@@ -73,12 +73,12 @@ class Config implements \ArrayAccess, \Serializable, \JsonSerializable
         // does nothing
     }
 
-    public function serialize(): string
+    public function __serialize(): array
     {
-        return serialize($this->values);
+        return $this->toArray();
     }
 
-    public function unserialize($serialized): mixed
+    public function __unserialize($serialized): void
     {
         $this->values = unserialize($serialized);
     }
