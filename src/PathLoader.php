@@ -3,7 +3,7 @@ namespace Eddy\Config;
 
 use Symfony\Component\Yaml\Yaml;
 
-class ConfigLoader
+class PathLoader
 {
     public const UNSUPPORTED_FILETYPE = 'UNSUPPORTED_FILETYPE';
 
@@ -22,7 +22,10 @@ class ConfigLoader
             );
         }
 
-        return new Config($this->loadValues($path));
+        $vals = $this->loadValues($path);
+
+        // TODO do this elsewhere?
+        return $vals;
     }
     
     protected function pathToKey(string $path)
